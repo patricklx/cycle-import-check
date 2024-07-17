@@ -79,7 +79,14 @@ export const readFile = (absolutePath: string) => {
  */
 export const resolveFilePath = (fromFileAbsolutePath: string, importFileRelativePath: string) => {
   const dir = dirname(fromFileAbsolutePath);
-  const targetPath = join(dir, importFileRelativePath);
+  let targetPath = join(dir, importFileRelativePath);
+  // to do replace nodejs resolve function
+  try {
+    return normalize(resolve(targetPath));
+  } catch (error) {
+  }
+
+  targetPath = join(process.cwd(), importFileRelativePath);
   // to do replace nodejs resolve function
   try {
     return normalize(resolve(targetPath));
