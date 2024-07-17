@@ -26,8 +26,7 @@ export const findFileDependencies = (fileAbsolutePath: string, fileCodeString: s
         if (node.source) {
           const importPath = node.source.value
           // only relative module
-          if (importPath.startsWith(".")) {
-            const sourceFile = resolveFilePath(fileAbsolutePath, node.source.value)
+          const sourceFile = resolveFilePath(fileAbsolutePath, node.source.value)
             if (sourceFile) {
               result.push({
                 fromFile: fileAbsolutePath,
@@ -35,7 +34,6 @@ export const findFileDependencies = (fileAbsolutePath: string, fileCodeString: s
                 code: fileCodeString.slice(node.start, node.end)
               })
             }
-          }
         }
       },
       ExportNamedDeclaration: (p) => {
